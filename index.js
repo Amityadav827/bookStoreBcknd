@@ -33,10 +33,12 @@ try {
 app.use("/book", bookRoute);
 app.use("/user", userRoute);
 
-app.get("/", (req, res) => {
-    app.use(express.static(path.resolve(__dirname, "Frontend", "build")));
-    res.sendFile(path.resolve(__dirname, "Frontend", "build", "index.html"));
-    });
+app.use(express.static(path.join(__dirname, 'frontend', 'build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+});
+
     
 
 app.listen(PORT, () => {

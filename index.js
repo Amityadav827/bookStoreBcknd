@@ -6,12 +6,13 @@ import cors from "cors";
 import bookRoute from "./route/book.route.js";
 import userRoute from "./route/user.route.js";
 
+dotenv.config();
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors({
   origin: '*',
@@ -23,12 +24,11 @@ app.get("/", (req, res) => {
   res.send('Api is Working');
 });
 
-dotenv.config();
+const PORT = process.env.PORT || 4002;
+const URI = process.env.MongoDBURI;
 
-const PORT = process.env.PORT || 4000;
-const URI = process.env.MongoDBURI || 'mongodb+srv://amityadav98255:hHG3wZTmOtV9wy6S@cluster0.qkf2imk.mongodb.net/bookstore?retryWrites=true&w=majority';
+console.log("MongoDB URI:", URI);
 
-// connect to mongoDB
 mongoose.connect(URI, {
   serverSelectionTimeoutMS: 30000 // Increase timeout to 30 seconds
 })
@@ -37,8 +37,8 @@ mongoose.connect(URI, {
 
 // defining routes
 app.use("/book", bookRoute);
-app.use("/user", userRoute);    
+app.use("/user", userRoute);
 
 app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
+  console.log(`Server is listening on port ${PORT}`);
 });

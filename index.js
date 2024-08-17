@@ -26,13 +26,16 @@ app.get("/", (req, res) => {
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
-const URI = process.env.MongoDBURI;
+const URI = process.env.MongoDBURI || 'mongodb+srv://amityadav98255:hHG3wZTmOtV9wy6S@cluster0.qkf2imk.mongodb.net/bookstore?retryWrites=true&w=majority';
 
 // connect to mongoDB
-mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000 // Increase timeout to 30 seconds
+})
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
-
 
 // defining routes
 app.use("/book", bookRoute);

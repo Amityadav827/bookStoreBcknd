@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
   res.send('Api is Working');
 });
 
-const PORT = process.env.PORT || 4002;
+const PORT = process.env.PORT || 4000;
 const URI = process.env.MongoDBURI;
 
 console.log("MongoDB URI:", URI);

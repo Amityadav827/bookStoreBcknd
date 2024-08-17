@@ -30,8 +30,6 @@ const URI = process.env.MongoDBURI || 'mongodb+srv://amityadav98255:hHG3wZTmOtV9
 
 // connect to mongoDB
 mongoose.connect(URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000 // Increase timeout to 30 seconds
 })
   .then(() => console.log('MongoDB connected'))

@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import cors from "cors";
+const bodyParser = require("body-parser");
+const cors = require('cors');
 import bookRoute from "./route/book.route.js";
 import userRoute from "./route/user.route.js";
 
@@ -9,7 +10,18 @@ import userRoute from "./route/user.route.js";
 const app = express();
 
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
+
+app.use(cors({
+  origin: '*',
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+}));
+
+app.get("/", (req, res) => {
+  res.send('Api is Working');
+});
 
 dotenv.config();
 

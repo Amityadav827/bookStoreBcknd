@@ -33,7 +33,7 @@ mongoose.connect(URI, {
   serverSelectionTimeoutMS: 30000 // Increase timeout to 30 seconds
 })
   .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .catch(err => console.error('MongoDB connection errors:', err));
 
 // defining routes
 app.use("/book", bookRoute);
